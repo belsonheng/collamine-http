@@ -58,6 +58,10 @@ A URL seed list includes a list of websites, one-per-line, which nutch will look
         cd urls
         touch seed.txt
 
+For e.g.
+
+        echo -e "http://forums.hardwarezone.com.sg/money-mind-210/" > seed.txt
+
 ##### (Optional) Configure Regular Expression Filters
 The file conf/regex-urlfilter.txt will provide Regular Expressions that allow nutch to filter and narrow the types of web resources to crawl and download
 
@@ -66,9 +70,9 @@ Edit the file conf/regex-urlfilter.txt and replace
         # accept anything else
         +.
 
-with a regular expression matching the domain you wish to crawl.
+with a regular expression matching the domain you wish to crawl. For e.g.
 
-        +(http)(:)(\\/)(\\/)(forums\\.hardwarezone\\.com\\.sg)(\\/)(hwm)(-)(magazine)(-)(publication)(-)(38)(\\/)(.*?(\\.)(html))*
+        +(http)(:)(\\/)(\\/)(forums\\.hardwarezone\\.com\\.sg)(\\/)(money)(-)(mind)(-)(210)(\\/)(.*?(\\.)(html))*
 
 To run nutch crawler,
 
