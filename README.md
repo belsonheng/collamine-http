@@ -11,31 +11,24 @@ To get started, first install **MySQL** and start the service. Then, proceed wit
 
         svn co http://svn.apache.org/repos/asf/nutch/tags/release-2.2.1
 
-2. Create nutch-site.xml from the template in conf/
+2. Replace the following config files with the ones in [collamine-http/extras/](https://github.com/belsonheng/collamine-http/tree/master/extras) 
 
-        cp release-2.2.1/conf/nutch-site.xml.template release-2.2.1/conf/nutch-site.xml
+        # ivy/ivy.xml
+        cp collamine-http/extras/ivy/ivy.xml release-2.2.1/ivy/ivy.xml
+        
+        # nutch-site.xml
+        cp collamine-http/extras/conf/nutch-site.xml release-2.2.1/conf/nutch-site.xml
+        
+        # gora.properties
+        cp collamine-http/extras/conf/gora.properties release-2.2.1/conf/gora.properties
+        
+        # src/plugin/build.xml
+        cp collamine-http/extras/src/plugin/build.xml release-2.2.1/src/plugin/build.xml
+        
+        # GeneratorJob.java - to fix batchId null reference
+        cp collamine-http/extras/GeneratorJob.java release-2.2.1/src/java/org/apache/nutch/crawl/GeneratorJob.java
 
-3. Modify conf/nutch-site.xml with the following
-
-        <?xml version=\"1.0\"?>
-        <?xml-stylesheet type=\"text/xsl\" href=\"configuration.xsl\"?>
-        <\x21-- Put site-specific property overrides in this file. -->
-        <configuration>  
-        	<property>
-        	 <name>http.agent.name</name>
-        	 <value>Nutch Spider</value>
-        	</property>
-        	<property>
-          	 <name>storage.data.store.class</name>
-        	 <value>org.apache.gora.sql.store.SqlStore</value>
-        	</property>
-        	<property>
-        	 <name>plugin.includes</name>
-        	 <value>collamine-http|parse-(html|tika)|index-(basic|anchor)|urlnormalizer-(pass|regex|basic)</value>
-        	</property>
-        </configuration>
-
-4. Modify conf/gora.properties to use MySQL as the data store. *Update MySQL connection properties where necessary*
+3. **(Optional)** Update MySQL connection properties if necessary
 
         ###############################
         # Default SqlStore properties #
@@ -46,30 +39,11 @@ To get started, first install **MySQL** and start the service. Then, proceed wit
         gora.sqlstore.jdbc.user=root
         gora.sqlstore.jdbc.password=password
 
-5. Modify ivy/ivy.xml to use MySQL as gora backend.
-   Uncomment the following
-
-        <dependency org="mysql" name="mysql-connector-java" rev="5.1.18" conf="*->default"/>
-        <dependency org="org.apache.gora" name="gora-sql" rev="0.1.1-incubating" conf="*->default"/>
-
-   Downgrade to gora-core 0.2.1 in order to use SQL as a backend.
-
-        <dependency org="org.apache.gora" name="gora-core" rev="0.2.1" conf="*->default"/>
-
-6. Place collamine-http into the Nutch plugin folders src/plugin/
+4. Place collamine-http into the Nutch plugin folders src/plugin/
 
         cp -R collamine-http release-2.2.1/src/plugin/collamine-http
 
-7. Modify src/plugin/build.xml to include collamine-http under deploy and clean targets respectively
-
-        <ant dir="collamine-http" target="deploy"/>
-        ...
-        <ant dir="collamine-http" target="clean"/>
-
-8. Modify src/java/org/apache/nutch/crawl/GeneratorJob.java to fix the batchId null issue in Nutch 2.2.1
-    Add the following in the Map<String,Object> run(Map<String,Object> args) method
-
-8. Navigate into Nutch source code folder *release-2.2.1* and run *ant* to compile
+5. Navigate into Nutch source code folder *release-2.2.1* and run *ant* to compile
 
         cd release-2.2.1/ && ant
 ### Crawl with Nutch
