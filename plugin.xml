@@ -16,8 +16,8 @@
       <import plugin="lib-http"/>
    </requires>
 
-   <extension id="org.apache.nutch.collamine.http"
-              name="HttpCollamine"
+   <extension id="org.apache.nutch.collamine.collamine-http"
+              name="CollamineHttpProtocol"
               point="org.apache.nutch.protocol.Protocol">
 
       <implementation id="org.apache.nutch.collamine.http.Http"
