@@ -51,14 +51,14 @@ Crawl with Nutch
 ---------------
 If all went well, [collamine-http](https://github.com/belsonheng/collamine-http) plugin is now compiled with Nutch source code. 
 
-#### Create a URL seed list
+##### Create a URL seed list
 A URL seed list includes a list of websites, one-per-line, which nutch will look to crawl. To start crawling with nutch, create a url seed list as follow. Then, populate seed.txt with the urls you want to crawl
 
         mkdir -p urls
         cd urls
         touch seed.txt
 
-#### (Optional) Configure Regular Expression Filters
+##### (Optional) Configure Regular Expression Filters
 The file conf/regex-urlfilter.txt will provide Regular Expressions that allow nutch to filter and narrow the types of web resources to crawl and download
 
 Edit the file conf/regex-urlfilter.txt and replace
