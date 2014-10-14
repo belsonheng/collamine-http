@@ -47,7 +47,7 @@ To get started, first install **MySQL** and start the service. Then, proceed wit
 
         cd release-2.2.1/ && ant
 ### Crawl with Nutch
-If all went well, collamine-http plugin is now compiled with Nutch source code. To start crawling with nutch, create a url seed list as follow:
+If all went well, [collamine-http](https://github.com/belsonheng/collamine-http) plugin is now compiled with Nutch source code. To start crawling with nutch, create a url seed list as follow:
 
         mkdir -p urls
         cd urls
