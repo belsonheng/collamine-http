@@ -11,24 +11,28 @@ To get started, first install **MySQL** and start the service. Then, proceed wit
 
         svn co http://svn.apache.org/repos/asf/nutch/tags/release-2.2.1
 
-2. Replace the following config files with the ones in [collamine-http/extras/](https://github.com/belsonheng/collamine-http/tree/master/extras) 
+2. Clone this repository into Nutch's plugin directory
+
+        git clone https://github.com/belsonheng/collamine-http.git release-2.2.1/src/plugin/collamine-http
+
+3. Replace the following config files with the ones in [collamine-http/extras/](https://github.com/belsonheng/collamine-http/tree/master/extras) 
 
         # ivy/ivy.xml
-        cp collamine-http/extras/ivy/ivy.xml release-2.2.1/ivy/ivy.xml
+        cp release-2.2.1/src/plugin/collamine-http/extras/ivy/ivy.xml release-2.2.1/ivy/ivy.xml
         
         # nutch-site.xml
-        cp collamine-http/extras/conf/nutch-site.xml release-2.2.1/conf/nutch-site.xml
+        cp release-2.2.1/src/plugin/collamine-http/extras/conf/nutch-site.xml release-2.2.1/conf/nutch-site.xml
         
         # gora.properties
-        cp collamine-http/extras/conf/gora.properties release-2.2.1/conf/gora.properties
+        cp release-2.2.1/src/plugin/collamine-http/extras/conf/gora.properties release-2.2.1/conf/gora.properties
         
         # src/plugin/build.xml
-        cp collamine-http/extras/src/plugin/build.xml release-2.2.1/src/plugin/build.xml
+        cp release-2.2.1/src/plugin/collamine-http/extras/src/plugin/build.xml release-2.2.1/src/plugin/build.xml
         
         # GeneratorJob.java - to fix batchId null reference
-        cp collamine-http/extras/GeneratorJob.java release-2.2.1/src/java/org/apache/nutch/crawl/GeneratorJob.java
+        cp release-2.2.1/src/plugin/collamine-http/extras/GeneratorJob.java release-2.2.1/src/java/org/apache/nutch/crawl/GeneratorJob.java
 
-3. **(Optional)** Update MySQL connection properties if necessary
+4. **(Optional)** Update MySQL connection properties if necessary
 
         ###############################
         # Default SqlStore properties #
@@ -38,10 +42,6 @@ To get started, first install **MySQL** and start the service. Then, proceed wit
         gora.sqlstore.jdbc.url=jdbc:mysql://localhost:3306/nutch?createDatabaseIfNotExist=true
         gora.sqlstore.jdbc.user=root
         gora.sqlstore.jdbc.password=password
-
-4. Place collamine-http into the Nutch plugin folders src/plugin/
-
-        cp -R collamine-http release-2.2.1/src/plugin/collamine-http
 
 5. Navigate into Nutch source code folder *release-2.2.1* and run *ant* to compile
 
