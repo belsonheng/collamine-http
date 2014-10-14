@@ -46,12 +46,30 @@ To get started, first install **MySQL** and start the service. Then, proceed wit
 5. Navigate into Nutch source code folder *release-2.2.1* and run *ant* to compile
 
         cd release-2.2.1/ && ant
-### Crawl with Nutch
-If all went well, [collamine-http](https://github.com/belsonheng/collamine-http) plugin is now compiled with Nutch source code. To start crawling with nutch, create a url seed list as follow:
+
+Crawl with Nutch
+---------------
+If all went well, [collamine-http](https://github.com/belsonheng/collamine-http) plugin is now compiled with Nutch source code. 
+
+#### Create a URL seed list
+A URL seed list includes a list of websites, one-per-line, which nutch will look to crawl. To start crawling with nutch, create a url seed list as follow. Then, populate seed.txt with the urls you want to crawl
 
         mkdir -p urls
         cd urls
         touch seed.txt
-Populate seed.txt with the urls you want Nutch to crawl. *One URL per line for each site*
 
-runtime/local/bin/nutch crawl urls/ -threads 10 -depth 1 -topN 3
+#### (Optional) Configure Regular Expression Filters
+The file conf/regex-urlfilter.txt will provide Regular Expressions that allow nutch to filter and narrow the types of web resources to crawl and download
+
+Edit the file conf/regex-urlfilter.txt and replace
+
+        # accept anything else
+        +.
+
+with a regular expression matching the domain you wish to crawl.
+
+        +(http)(:)(\\/)(\\/)(forums\\.hardwarezone\\.com\\.sg)(\\/)(hwm)(-)(magazine)(-)(publication)(-)(38)(\\/)(.*?(\\.)(html))*
+
+To run nutch crawler,
+
+        release-2.2.1/runtime/local/bin/nutch crawl urls/ -threads 10 -depth 1 -topN 3
