@@ -137,7 +137,6 @@ public class CollamineResponse implements Response {
         processResponse(socket.getInputStream());
 
         long endTime = System.nanoTime();
-        double crawledTime = (double)((endTime-startTime)/(Math.pow(10, 9)));
 
         String docName;
 
@@ -145,7 +144,7 @@ public class CollamineResponse implements Response {
           System.out.println("Uploading to collamine what I have crawled ..."); // Uploading to collamine
           new Middleware().uploadToCollamine( host, 
                                               url.toString(), 
-                                              crawledTime, 
+                                              endTime-startTime, 
                                               "belson", 
                                               IOUtils.toInputStream(new String(content, "UTF-8"), "UTF-8"), 
                                               docName);

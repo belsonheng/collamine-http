@@ -46,7 +46,7 @@ public class Middleware {
     return body.toString().equals("not found") ? null : body.toString();
   }
 
-  public void uploadToCollamine(String domain, String url, double crawlTime, String contributor, InputStream doc, String docName) throws Exception {
+  public void uploadToCollamine(String domain, String url, long crawlTime, String contributor, InputStream doc, String docName) throws Exception {
     // HTTP POST request
     HttpClient client = HttpClientBuilder.create().build();
     HttpPost post = new HttpPost(COLLAMINE_UPLOAD_URL);
